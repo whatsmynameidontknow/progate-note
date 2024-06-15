@@ -1,8 +1,11 @@
+import { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import NoteForm from '../components/NoteForm';
 import Button from '../components/ui/Button';
+import NoteContext from '../contexts/NoteContext';
 
-export default function Edit({ onUpdate, activeNote, setCurrentPage }) {
+export default function Edit({ activeNote }) {
+    const { updateNote, setCurrentPage } = useContext(NoteContext);
     const styles = StyleSheet.create({
         pageTitle: {
             fontSize: 40,
@@ -22,7 +25,7 @@ export default function Edit({ onUpdate, activeNote, setCurrentPage }) {
         <View>
             <Text style={styles.pageTitle}>Edit Note</Text>
             <NoteForm
-                onSubmit={onUpdate}
+                onSubmit={updateNote}
                 initialNote={activeNote}
                 buttonText="Update"
                 style={styles.form}

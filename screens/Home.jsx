@@ -1,8 +1,11 @@
+import { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import NoteList from '../components/NoteList';
 import Button from '../components/ui/Button';
+import NoteContext from '../contexts/NoteContext';
 
-export default function Home({ notes, setCurrentPage }) {
+export default function Home({ notes }) {
+    const { setCurrentPage } = useContext(NoteContext);
     const styles = StyleSheet.create({
         homeContainer: {
             flex: 1,

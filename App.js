@@ -34,42 +34,32 @@ export default function App() {
     return (
         <View style={styles.container}>
             <NoteContext.Provider
-                value={{ deleteNote, setCurrentPage, setActiveNote }}
+                value={{
+                    deleteNote,
+                    setCurrentPage,
+                    setActiveNote,
+                    addNote,
+                    updateNote,
+                }}
             >
                 <ScreenSwitcher
                     page={currentPage}
                     notes={notes}
-                    onAdd={addNote}
-                    onUpdate={updateNote}
                     activeNote={activeNote}
-                    setCurrentPage={setCurrentPage}
                 />
             </NoteContext.Provider>
         </View>
     );
 }
 
-const ScreenSwitcher = ({
-    page,
-    notes,
-    onAdd,
-    setCurrentPage,
-    onUpdate,
-    activeNote,
-}) => {
+const ScreenSwitcher = ({ page, notes, activeNote }) => {
     switch (page) {
         case 'home':
-            return <Home setCurrentPage={setCurrentPage} notes={notes} />;
+            return <Home notes={notes} />;
         case 'add':
-            return <Add onAdd={onAdd} setCurrentPage={setCurrentPage} />;
+            return <Add />;
         case 'edit':
-            return (
-                <Edit
-                    onUpdate={onUpdate}
-                    activeNote={activeNote}
-                    setCurrentPage={setCurrentPage}
-                />
-            );
+            return <Edit activeNote={activeNote} />;
     }
 };
 
