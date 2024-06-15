@@ -4,8 +4,7 @@ import NoteContext from '../contexts/NoteContext';
 import Button from './ui/Button';
 
 export default function NoteCard({ note }) {
-    const { deleteNote, setActiveNote, setCurrentPage } =
-        useContext(NoteContext);
+    const { deleteNote, setNote, setCurrentPage } = useContext(NoteContext);
     const styles = StyleSheet.create({
         card: {
             borderWidth: 2,
@@ -49,7 +48,7 @@ export default function NoteCard({ note }) {
                     <Button
                         text={'Edit'}
                         onPress={() => {
-                            setActiveNote(note);
+                            setNote(note);
                             setCurrentPage('edit');
                         }}
                         buttonStyle={styles.editButton}

@@ -4,7 +4,7 @@ import NoteForm from '../components/NoteForm';
 import Button from '../components/ui/Button';
 import NoteContext from '../contexts/NoteContext';
 
-export default function Edit({ activeNote }) {
+export default function Edit() {
     const { updateNote, setCurrentPage } = useContext(NoteContext);
     const styles = StyleSheet.create({
         pageTitle: {
@@ -26,7 +26,6 @@ export default function Edit({ activeNote }) {
             <Text style={styles.pageTitle}>Edit Note</Text>
             <NoteForm
                 onSubmit={updateNote}
-                initialNote={activeNote}
                 buttonText="Update"
                 style={styles.form}
             />

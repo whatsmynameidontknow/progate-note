@@ -6,7 +6,7 @@ import Edit from './screens/Edit';
 import Home from './screens/Home';
 
 export default function App() {
-    const [currentPage, setCurrentPage] = useState('home');
+    const [currentPage, setCurrentPage] = useState(Pages.HOME);
     const [notes, setNotes] = useState([]);
     const addNote = (note) => {
         setNotes([...notes, note]);
@@ -25,10 +25,9 @@ export default function App() {
         );
     };
 
-    const [activeNote, setActiveNote] = useState({
+    const [note, setNote] = useState({
         title: '',
         content: '',
-        ID: 0,
     });
 
     return (
@@ -37,7 +36,8 @@ export default function App() {
                 value={{
                     deleteNote,
                     setCurrentPage,
-                    setActiveNote,
+                    note,
+                    setNote,
                     addNote,
                     updateNote,
                 }}
@@ -45,21 +45,21 @@ export default function App() {
                 <ScreenSwitcher
                     page={currentPage}
                     notes={notes}
-                    activeNote={activeNote}
+                    activeNote={note}
                 />
             </NoteContext.Provider>
         </View>
     );
 }
 
-const ScreenSwitcher = ({ page, notes, activeNote }) => {
+const ScreenSwitcher = ({ page, notes }) => {
     switch (page) {
         case 'home':
             return <Home notes={notes} />;
         case 'add':
             return <Add />;
         case 'edit':
-            return <Edit activeNote={activeNote} />;
+            return <Edit />;
     }
 };
 

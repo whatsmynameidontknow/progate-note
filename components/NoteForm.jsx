@@ -1,20 +1,11 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import NoteContext from '../contexts/NoteContext';
 import Button from './ui/Button';
 import InputText from './ui/TextInput';
 
-export default function NoteForm({
-    initialNote = {
-        title: '',
-        content: '',
-    },
-    onSubmit,
-    buttonText,
-    style = {},
-}) {
-    const [note, setNote] = useState(initialNote);
-    const { setCurrentPage } = useContext(NoteContext);
+export default function NoteForm({ onSubmit, buttonText, style = {} }) {
+    const { setCurrentPage, setNote, note } = useContext(NoteContext);
     const isNoteEmpty = () =>
         note.title.length === 0 || note.content.length === 0;
     const styles = StyleSheet.create({
@@ -64,7 +55,11 @@ export default function NoteForm({
                 onPress={() => {
                     onSubmit({
                         ...note,
-                        ID: initialNote.ID || Date.now(),
+                        ID: note.ID || Date.now(),
+                    });
+                    setNote({
+                        title: '',
+                        content: '',
                     });
                     setCurrentPage('home');
                 }}
